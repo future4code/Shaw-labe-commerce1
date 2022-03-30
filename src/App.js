@@ -14,24 +14,42 @@ const MainContainer = styled.div`
   gap:10px;
   
 `
+
 export default class App extends React.Component{
   state = {
-    listaDeCarrinho:"",
+    listaDeCarrinho:ListaDeProdutos.filter(produto => produto.quantidade!==0),
     selecCrescente:"",
     selecDecrescente:"",
     inputMax:"",
     inputMin:"",
     buscaPorNome:""
   }
-  
+  componentDidMount(){
+    const produtosSalvosCarrinho = JSON.parse(localStorage.getItem("listaDeCarrinho"));
+    produtosSalvosCarrinho.length && this.setState({ listaDeCarrinho: produtosSalvosCarrinho })
+  }
+  componentDidUpdate(prevProps,prevState){
+    if (prevState.listaDeCarrinho !== this.state.listaDeCarrinho) {
+      localStorage.setItem("listaDeCarrinho", JSON.stringify(this.state.listaDeCarrinho));
+    }  
+  }
+  removerProdutoCarrinho = (id) => {
+    let copiaListaCarrinho = [...this.state.listaDeCarrinho]
+    let indexProduto = copiaListaCarrinho.findIndex(produto => produto.id===id) 
+    copiaListaCarrinho.splice(indexProduto,1)
+    this.setState({listaDeCarrinho: copiaListaCarrinho})
+  }
   render(){
+
     return (
       <MainContainer>
         <Filtro 
         />
         <Produtos 
         />
-        <Carrinho 
+        <Carrinho
+          listaCarrinho={this.state.listaDeCarrinho} 
+          removerProdutoCarrinho={this.removerProdutoCarrinho}
         />
       </MainContainer>
     );
