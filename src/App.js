@@ -3,8 +3,17 @@ import Filtro from './componentes/Filtro/Filtro';
 import Carrinho from './componentes/Carrinho/Carrinho';
 import Produtos from './componentes/Produtos/Produtos';
 import { ListaDeProdutos } from './listaProdutos';
-import styled from 'styled-components';
+import styled,{createGlobalStyle} from 'styled-components';
 
+const GlobalStyle = createGlobalStyle`
+  *::-webkit-scrollbar{
+    width: 5px;
+    height:50px;
+  }
+  *::-webkit-scrollbar-thumb{
+    background-image: linear-gradient(to top, darkblue,blueviolet, rgb(228, 60, 161));
+  }
+`
 const MainContainer = styled.div`
   height: 100vh ;
   width: 100vw;
@@ -61,11 +70,14 @@ onChangeBuscaPorNome=(event) =>{
        onChangeBuscaPorNome={this.onChangeBuscaPorNome}
        />
         <Produtos 
+        ListaDeProdutos = {ListaDeProdutos}
         />
         <Carrinho
           listaCarrinho={this.state.listaDeCarrinho} 
           removerProdutoCarrinho={this.removerProdutoCarrinho}
         />
+
+        <GlobalStyle/>
       </MainContainer>
     );
   }

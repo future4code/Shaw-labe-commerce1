@@ -16,9 +16,9 @@ const MainContainer = styled.div`
 
 const InputContainer=styled.label`
 display:flex;
-flex-direction:colum;
-align-itens:flex-start;
-margin-botton:8px;
+flex-direction:column;
+align-items:flex-start;
+margin-bottom:8px;
 `
 
 
