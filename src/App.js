@@ -26,8 +26,8 @@ export default class App extends React.Component{
   }
   componentDidMount(){
     const produtosSalvosCarrinho = JSON.parse(localStorage.getItem("listaDeCarrinho"));
-    produtosSalvosCarrinho.length && this.setState({ listaDeCarrinho: produtosSalvosCarrinho })
-  }
+    produtosSalvosCarrinho && this.setState({ listaDeCarrinho: produtosSalvosCarrinho })
+   }
   componentDidUpdate(prevProps,prevState){
     if (prevState.listaDeCarrinho !== this.state.listaDeCarrinho) {
       localStorage.setItem("listaDeCarrinho", JSON.stringify(this.state.listaDeCarrinho));
@@ -39,12 +39,27 @@ export default class App extends React.Component{
     copiaListaCarrinho.splice(indexProduto,1)
     this.setState({listaDeCarrinho: copiaListaCarrinho})
   }
-  render(){
+  onChangeInputMin=(event) =>{
+    this.setState({inputMin:event.target.value})
+ }
 
-    return (
-      <MainContainer>
-        <Filtro 
-        />
+ onChangeInputMax=(event) =>{
+   this.setState({inputMax:event.target.value})
+} 
+onChangeBuscaPorNome=(event) =>{
+ this.setState({buscaPorNome:event.target.value})
+}
+ render(){
+   return (
+     <MainContainer>
+       <Filtro 
+       inputMin={this.state.inputMin}
+       inputMax={this.state.inputMax}
+       buscaPorNome={this.state.buscaPorNome}
+       onChangeInputMin={this.onChangeInputMin}
+       onChangeInputMax={this.onChangeInputMax}
+       onChangeBuscaPorNome={this.onChangeBuscaPorNome}
+       />
         <Produtos 
         />
         <Carrinho
