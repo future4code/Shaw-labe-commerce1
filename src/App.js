@@ -5,6 +5,7 @@ import Produtos from './componentes/Produtos/Produtos';
 import { ListaDeProdutos } from './listaProdutos';
 import styled,{createGlobalStyle} from 'styled-components';
 
+
 const GlobalStyle = createGlobalStyle`
   *::-webkit-scrollbar{
     width: 5px;
@@ -71,6 +72,7 @@ onChangeBuscaPorNome=(event) =>{
        />
         <Produtos 
         ListaDeProdutos = {ListaDeProdutos}
+        
         />
         <Carrinho
           listaCarrinho={this.state.listaDeCarrinho} 
