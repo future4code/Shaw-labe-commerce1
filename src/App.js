@@ -32,7 +32,8 @@ export default class App extends React.Component{
     selecDecrescente:"",
     inputMax:"",
     inputMin:"",
-    buscaPorNome:""
+    buscaPorNome:"",
+    carrinho:[]
   }
   componentDidMount(){
     const produtosSalvosCarrinho = JSON.parse(localStorage.getItem("listaDeCarrinho"));
