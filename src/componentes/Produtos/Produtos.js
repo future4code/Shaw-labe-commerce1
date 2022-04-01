@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const MainContainer = styled.div`
-  height: 90%;
-  width: 60%;
-  border: 1px solid black;
+  grid-area: main;
+  height: 100%;
+  width: 100%;
+  border: 2px solid black;
   display: flex;
   flex-flow:column nowrap;
   background-color: black;
@@ -77,28 +78,47 @@ const ScrollContainer = styled.div`
   overflow-y: scroll;
   height: 100%;
 `
+const Header = styled.div`
+display: flex;
+flex-direction: rows ;
+justify-content: center;
+margin-top:5px;
+gap:100px;
+`
 export default class Produto extends React.Component {
   state = {
     sort: "DECRESCENTE",
   };
 
-  getFiltraLista = () => {
-    return this.props.produtos
-      .filter((produto) => produto.preco > this.props.inputMin)
-      .filter((produto) => produto.preco < this.props.inputMax)
+  getFiltrar = () => {
+    return this.props.ListaDeProdutos
+      .filter((produto) => produto.valor > this.props.inputMin)
+      .filter((produto) => produto.valor < this.props.inputMax)
       .filter((produto) => produto.nome.includes(this.props.buscaPorNome))
-      .sort((a, b) =>
-        this.state.sort === "CRESCENTE" ? a.preco - b.preco : b.preco - a.preco
-      );
-  };
+  }
 
+  getOrdenar = () => {
+    return this.props.ListaDeProdutos
+
+      .sort((a, b) => this.state.sort === 'CRESCENTE' ? a.valor - b.valor : b.valor - a.valor)
+  }
+  onChangeSort = (event) => {
+    this.setState({ sort: event.target.value })
+  }
   render() {
+    const filtrarProd = this.getFiltrar()
+    const ordenarProd = this.getOrdenar()
+
     let renderProdutos;
-    renderProdutos = this.props.ListaDeProdutos.map((produto) => {
+    let mostrarProdutos;
+    { filtrarProd.length ? mostrarProdutos = filtrarProd : mostrarProdutos = this.props.ListaDeProdutos }
+    renderProdutos = mostrarProdutos.map((produto) => {
+
       return (
-        <CardContainer>
-          <img src={produto.imagem} />
+        <CardContainer key={produto.id}>
+          {/* <img src={produto.imagem} /> */}
           <h2> {produto.nome}</h2>
+
           <h3>R$ {produto.valor.toFixed(2).replace('.',',')}</h3>
           <p>{produto.parcelas}</p>
           <ProdutoBotao
@@ -106,6 +126,7 @@ export default class Produto extends React.Component {
           >
             Adicionar ao Carrinho
           </ProdutoBotao>
+
         </CardContainer>
       );
     });
@@ -113,15 +134,16 @@ export default class Produto extends React.Component {
     return (
       <MainContainer>
         <ScrollContainer>
-          <label>
-            {" "}
-            Ordenação:
-            <select value={this.state.sort}>
-              <option value={"CRESCENTE"}>Crescente</option>
-              <option value={"DECRESCENTE"}>Decrescente</option>
-            </select>
-          </label>
-
+          <Header>
+            Quantidade de Produtos:  {mostrarProdutos.length}
+            <label>
+              Ordenação:
+              <select value={this.state.sort} onChange={this.onChangeSort}>
+                <option value={"CRESCENTE"}>Crescente</option>
+                <option value={"DECRESCENTE"}>Decrescente</option>
+              </select>
+            </label>
+          </Header>
           <ContainerProdutos>{renderProdutos}</ContainerProdutos>
         </ScrollContainer>
       </MainContainer>
