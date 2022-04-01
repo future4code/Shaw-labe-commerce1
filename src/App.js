@@ -8,6 +8,7 @@ import Header from './componentes/Header/Header';
 import DetalheProduto from './componentes/DetalheProduto/DetalheProduto';
 
 
+
 const GlobalStyle = createGlobalStyle`
 *{
     padding: 0px;
