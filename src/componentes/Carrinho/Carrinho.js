@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import iconeCarrinho from './carrinho-de-compras.png'
+import iconeCarrinho from '../../carrinho-de-compras.png'
 
 const MainContainer = styled.div`
-  height: 90%;
-  width: 20%;
-  border:2px solid black;
-  margin-right: 10px;
-  background-color:black;
+  grid-area: sidebarright;
+  height: 100%;
+  padding: 15px 5px;
+  background-image:url('https://img.myloview.com.br/quadros/ceu-estrelado-700-58364744.jpg') ;
   color: white;
   display: flex;
   flex-direction: column;
@@ -23,7 +22,10 @@ const ListaProdutos = styled.div`
   
 `
 const ItemProduto = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 5% 70% 20%;
+  padding: 5px;
+  gap:5px;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
@@ -34,10 +36,8 @@ const Button = styled.button`
   outline: none;
   border-radius: 5px;
   color:white;
-  /* font-weight: bold; */
   padding: 5px;
   background-image: linear-gradient(to right, darkblue,blueviolet, rgb(228, 60, 161));
-  /* background-image: linear-gradient(to right, darkblue,blueviolet); */
 `
 const Img = styled.img`
   width: 15%;
@@ -47,12 +47,18 @@ const TituloCarrinho = styled.div`
   align-items: center;
   justify-content: center;
   gap:5px;
+  h3{
+    font-size: 16px;
+  }
 `
 
 export default class Carrinho extends React.Component{
   render(){
     let listaProdutoCarrinho;
-    listaProdutoCarrinho = this.props.listaCarrinho.map((produto)=>{
+    const filteredArray = this.props.listaCarrinho.filter((ele , pos)=>{
+      return this.props.listaCarrinho.indexOf(ele) === pos;
+  }) 
+    listaProdutoCarrinho = filteredArray.map((produto)=>{
       return(
         <ItemProduto key={produto.id}>
           <p>{produto.quantidade}</p>
@@ -62,7 +68,7 @@ export default class Carrinho extends React.Component{
       )
     });
     let valorTotal = 0;
-    this.props.listaCarrinho.forEach(element => {
+    filteredArray.forEach(element => {
       valorTotal = valorTotal + element.valor*element.quantidade
     });
 
@@ -75,7 +81,7 @@ export default class Carrinho extends React.Component{
         <ListaProdutos>
           {listaProdutoCarrinho}
         </ListaProdutos>
-        <p>Valor total: R${valorTotal},00</p>
+        <p>Valor total: R${valorTotal.toFixed(2).replace(".",",")}</p>
       </MainContainer>
     );
   }

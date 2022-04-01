@@ -3,87 +3,151 @@ import Filtro from './componentes/Filtro/Filtro';
 import Carrinho from './componentes/Carrinho/Carrinho';
 import Produtos from './componentes/Produtos/Produtos';
 import { ListaDeProdutos } from './listaProdutos';
-import styled,{createGlobalStyle} from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+import Header from './componentes/Header/Header';
+import DetalheProduto from './componentes/DetalheProduto/DetalheProduto';
+
 
 
 const GlobalStyle = createGlobalStyle`
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing:border-box;
+}
   *::-webkit-scrollbar{
     width: 5px;
     height:50px;
   }
   *::-webkit-scrollbar-thumb{
     background-image: linear-gradient(to top, darkblue,blueviolet, rgb(228, 60, 161));
+    
+    border-radius: 5px;
+  }
+  body{
+    /* background-color: rgb(46, 45, 45); */
+    background-color: black;
+    color: white;
+    
   }
 `
 const MainContainer = styled.div`
   height: 100vh ;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap:10px;
-  
+  max-width: 100vw;
+`
+const Container = styled.div`
+  height: 100%;
+  width: 100%;
+  grid-area:main;
+`
+const Borda = styled.div`
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-top: 1px solid;
+    border-image:linear-gradient(45deg,rgb(228, 60, 161),blueviolet,darkblue, black )1;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0.7fr 2.6fr 0.7fr;
+    grid-template-rows: 10% 90%;
+    align-items: center;
+    
+    grid-template-areas: ${({ detalheProduto }) => (detalheProduto ? `"header header header"
+     "main main sidebarright"` :
+    `"header header header"  
+     "sidebar main sidebarright"`)};
+    
 `
 
-export default class App extends React.Component{
+export default class App extends React.Component {
   state = {
-    listaDeCarrinho:ListaDeProdutos.filter(produto => produto.quantidade!==0),
-    selecCrescente:"",
-    selecDecrescente:"",
-    inputMax:"",
-    inputMin:"",
-    buscaPorNome:"",
-    carrinho:[]
+
   }
-  componentDidMount(){
+  componentDidMount() {
     const produtosSalvosCarrinho = JSON.parse(localStorage.getItem("listaDeCarrinho"));
     produtosSalvosCarrinho && this.setState({ listaDeCarrinho: produtosSalvosCarrinho })
-   }
-  componentDidUpdate(prevProps,prevState){
+  }
+  componentDidUpdate(prevProps, prevState) {
     if (prevState.listaDeCarrinho !== this.state.listaDeCarrinho) {
       localStorage.setItem("listaDeCarrinho", JSON.stringify(this.state.listaDeCarrinho));
-    }  
+    }
   }
   removerProdutoCarrinho = (id) => {
     let copiaListaCarrinho = [...this.state.listaDeCarrinho]
-    let indexProduto = copiaListaCarrinho.findIndex(produto => produto.id===id) 
-    copiaListaCarrinho.splice(indexProduto,1)
-    this.setState({listaDeCarrinho: copiaListaCarrinho})
+    let copiaListaProduto = [...this.state.listaDeProdutos]
+    let indexProdutoCarrinho = copiaListaCarrinho.findIndex(produto => produto.id === id)
+    let indexProduto = copiaListaProduto.findIndex(produto => produto.id === id)
+    copiaListaProduto[indexProduto].quantidade -= 1
+    copiaListaCarrinho.splice(indexProdutoCarrinho, 1)
+    this.setState({
+      listaDeCarrinho: copiaListaCarrinho,
+      listaDeProdutos: copiaListaProduto
+    })
   }
 
- 
-  onChangeInputMin=(event) =>{
-    this.setState({inputMin:event.target.value})
- }
 
- onChangeInputMax=(event) =>{
-   this.setState({inputMax:event.target.value})
-} 
-onChangeBuscaPorNome=(event) =>{
- this.setState({buscaPorNome:event.target.value})
-}
- render(){
-   return (
-     <MainContainer>
-       <Filtro 
-       inputMin={this.state.inputMin}
-       inputMax={this.state.inputMax}
-       buscaPorNome={this.state.buscaPorNome}
-       onChangeInputMin={this.onChangeInputMin}
-       onChangeInputMax={this.onChangeInputMax}
-       onChangeBuscaPorNome={this.onChangeBuscaPorNome}
-       />
-        <Produtos 
-        ListaDeProdutos = {ListaDeProdutos}
-        
-        />
-        <Carrinho
-          listaCarrinho={this.state.listaDeCarrinho} 
-          removerProdutoCarrinho={this.removerProdutoCarrinho}
-        />
-
-        <GlobalStyle/>
-      </MainContainer>
-    );
+  onChangeInputMin = (event) => {
+    this.setState({ inputMin: event.target.value })
   }
-}
+
+  onChangeInputMax = (event) => {
+    this.setState({ inputMax: event.target.value })
+  }
+  onChangeBuscaPorNome = (event) => {
+    this.setState({ buscaPorNome: event.target.value })
+  }
+  verMais = (id) => {
+    this.setState({
+      idVerMais: id,
+      detalheProduto: true
+    })
+
+  }
+  verMenos = () => {
+    this.setState({
+      detalheProduto: false
+  })
+  }
+    render(){
+      return (
+        <MainContainer>
+          <GlobalStyle />
+          <Borda detalheProduto={this.state.detalheProduto}>
+            <Header />
+            {this.state.detalheProduto ?
+              <Container>
+                <DetalheProduto
+                  produto={ListaDeProdutos[0]}
+                  // produto={ListaDeProdutos[this.state.idVerMais - 1]}
+                  addCarrinho={this.adicionarProdutoCarrinho}
+                  verMenos={this.verMenos}
+                />
+              </Container>
+              :
+              <>
+                <Filtro
+                  inputMin={this.state.inputMin}
+                  inputMax={this.state.inputMax}
+                  buscaPorNome={this.state.buscaPorNome}
+                  onChangeInputMin={this.onChangeInputMin}
+                  onChangeInputMax={this.onChangeInputMax}
+                  onChangeBuscaPorNome={this.onChangeBuscaPorNome}
+                />
+                <Produtos
+                  ListaDeProdutos={ListaDeProdutos}
+                  inputMin={this.state.inputMin}
+                  inputMax={this.state.inputMax}
+                  buscaPorNome={this.state.buscaPorNome}
+                  verMais={this.verMais}
+                />
+              </>
+            }
+            <Carrinho
+              listaCarrinho={this.state.listaDeCarrinho}
+              removerProdutoCarrinho={this.removerProdutoCarrinho}
+            />
+          </Borda>
+        </MainContainer>
+      );
+    }
+  }
