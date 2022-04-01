@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const MainContainer = styled.div`
-  height: 90%;
-  width: 60%;
+  grid-area: main;
+  height: 100%;
+  width: 100%;
   border: 2px solid black;
   display: flex;
   flex-flow:column nowrap;
@@ -39,12 +40,6 @@ flex-direction: rows ;
 justify-content: center;
 margin-top:5px;
 gap:100px;
-
-
-
-
-
-
 `
 export default class Produto extends React.Component {
   state = {
@@ -60,32 +55,32 @@ export default class Produto extends React.Component {
 
   getOrdenar = () => {
     return this.props.ListaDeProdutos
-    
-    .sort((a, b) => this.state.sort === 'CRESCENTE' ? a.valor - b.valor : b.valor - a.valor)
+
+      .sort((a, b) => this.state.sort === 'CRESCENTE' ? a.valor - b.valor : b.valor - a.valor)
   }
-  onChangeSort=(event) =>{
-    this.setState({sort:event.target.value})
- } 
+  onChangeSort = (event) => {
+    this.setState({ sort: event.target.value })
+  }
   render() {
-    const filtrarProd= this.getFiltrar()
-    const ordenarProd= this.getOrdenar()
-      
+    const filtrarProd = this.getFiltrar()
+    const ordenarProd = this.getOrdenar()
+
     let renderProdutos;
     let mostrarProdutos;
-   {filtrarProd.length ?  mostrarProdutos=filtrarProd : mostrarProdutos=this.props.ListaDeProdutos }
-    renderProdutos = mostrarProdutos.map((produto) => { 
-    
+    { filtrarProd.length ? mostrarProdutos = filtrarProd : mostrarProdutos = this.props.ListaDeProdutos }
+    renderProdutos = mostrarProdutos.map((produto) => {
+
       return (
-        <CardContainer>
+        <CardContainer key={produto.id}>
           {/* <img src={produto.imagem} /> */}
           <h2> {produto.nome}</h2>
           <h3>Valor R$:{produto.valor}</h3>
           <p>quantidade: {produto.quantidade}</p>
-          <addProdutoBotao
+          <addProdutoBotão
             onClick={() => this.props.addProdutoCarrinho(produto.id)}
           >
             Adicionar ao Carrinho
-          </addProdutoBotao>
+          </addProdutoBotão>
         </CardContainer>
       );
     });
@@ -94,14 +89,14 @@ export default class Produto extends React.Component {
       <MainContainer>
         <ScrollContainer>
           <Header>
-          Quantidade de Produtos:  {mostrarProdutos.length}
-          <label>
-            Ordenação: 
-            <select value={this.state.sort} onChange={this.onChangeSort}>
-              <option value={"CRESCENTE"}>Crescente</option>
-              <option value={"DECRESCENTE"}>Decrescente</option>
-            </select>
-          </label>
+            Quantidade de Produtos:  {mostrarProdutos.length}
+            <label>
+              Ordenação:
+              <select value={this.state.sort} onChange={this.onChangeSort}>
+                <option value={"CRESCENTE"}>Crescente</option>
+                <option value={"DECRESCENTE"}>Decrescente</option>
+              </select>
+            </label>
           </Header>
           <ContainerProdutos>{renderProdutos}</ContainerProdutos>
         </ScrollContainer>
