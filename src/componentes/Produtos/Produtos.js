@@ -21,7 +21,7 @@ const ContainerProdutos = styled.div`
 
 const CardContainer = styled.div`
   max-width: 31%;
-  height: 20%;
+  height: 14%;
   text-align: center;
   background-image: linear-gradient(to top, darkblue,blueviolet,blue, rgb(228, 60, 161));
   margin: 7px;
@@ -64,6 +64,7 @@ const ProdutoBotao = styled.button`
   color:white;
   padding: 10px;
   background:black;
+  margin-top: 5%;
 
   :hover{
     background-image: linear-gradient(to right, black,darkblue,blueviolet, rgb(228, 60, 161,0.5))

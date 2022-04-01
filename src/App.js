@@ -61,15 +61,7 @@ const Borda = styled.div`
 
 export default class App extends React.Component {
   state = {
-    listaDeCarrinho: [],
-    selecCrescente: "",
-    selecDecrescente: "",
-    inputMax: "",
-    inputMin: "",
-    buscaPorNome: "",
-    listaDeProdutos: ListaDeProdutos,
-    detalheProduto: false,
-    idVerMais: ''
+
   }
   componentDidMount() {
     const produtosSalvosCarrinho = JSON.parse(localStorage.getItem("listaDeCarrinho"));
@@ -92,6 +84,7 @@ export default class App extends React.Component {
       listaDeProdutos: copiaListaProduto
     })
   }
+
 
   onChangeInputMin = (event) => {
     this.setState({ inputMin: event.target.value })

@@ -1,14 +1,15 @@
 
 export const ListaDeProdutos = [
+
     {
         id:1,
-        nome:"Moletom Masculino",
-        valor:179.99,
-        imagem:'https://static.netshoes.com.br/produtos/blusa-moletom-casual-masculina-capuz-bolso-canguru-conforto/06/QZQ-0469-006/QZQ-0469-006_zoom1.jpg?ts=1639762070&ims=544x',
+        nome:"Moletom Masculino Astronauta",
+        valor:185.89,
+        imagem:'https://www.souzasegurancadotrabalho.com.br/upload/130308/Revolta-casacos-camisolas-homens-hip-hop-e-streetwear-1.jpeg',
         quantidade:0,
-        parcelas:"em até 4x de R$ 44,99 sem juros"
-        
+        parcelas:"em até 4x de R$ 46,47 sem juros"
     },
+    
     {
         id:2,
         nome:"Moletom Masculino Astronauta",
@@ -160,12 +161,13 @@ export const ListaDeProdutos = [
     parcelas:"em até 4x de R$ 22,49 sem juros"
 },
 {
-    id:20,
-    nome:"Moletom Masculino Astronauta",
-    valor:185.89,
-    imagem:'https://www.souzasegurancadotrabalho.com.br/upload/130308/Revolta-casacos-camisolas-homens-hip-hop-e-streetwear-1.jpeg',
+    id:1,
+    nome:"Moletom Masculino",
+    valor:179.99,
+    imagem:'https://static.netshoes.com.br/produtos/blusa-moletom-casual-masculina-capuz-bolso-canguru-conforto/06/QZQ-0469-006/QZQ-0469-006_zoom1.jpg?ts=1639762070&ims=544x',
     quantidade:0,
-    parcelas:"em até 4x de R$ 46,47 sem juros"
+    parcelas:"em até 4x de R$ 44,99 sem juros"
+    
 },
 {
     id:21,
