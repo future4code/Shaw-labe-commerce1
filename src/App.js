@@ -49,6 +49,8 @@ export default class App extends React.Component{
     copiaListaCarrinho.splice(indexProduto,1)
     this.setState({listaDeCarrinho: copiaListaCarrinho})
   }
+
+ 
   onChangeInputMin=(event) =>{
     this.setState({inputMin:event.target.value})
  }
