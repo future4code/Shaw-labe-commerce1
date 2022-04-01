@@ -31,26 +31,20 @@ return(
 <MainContainer>
  <h3> Filtros</h3>
 
- Valor Mínimo
-<InputContainer>
-
-      
-      
+         Valor Mínimo
+        <InputContainer>
         <input type="number"
-        value={this.props.inputMin}    
+        value={this.props.inputMin}  
         onChange={this.props.onChangeInputMin}   
         />
         </InputContainer>
         <p></p>
+
         Valor Máximo
         <InputContainer>
-        
-        
-        
-                <input type="number"
+        <input type="number"
         value={this.props.inputMax}  
         onChange={this.props.onChangeInputMax}   
-
         />
         </InputContainer>
         <p></p>
