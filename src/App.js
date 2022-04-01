@@ -29,8 +29,8 @@ export default class App extends React.Component{
     listaDeCarrinho:ListaDeProdutos.filter(produto => produto.quantidade!==0),
     selecCrescente:"",
     selecDecrescente:"",
-    inputMax:"",
     inputMin:"",
+    inputMax:"",
     buscaPorNome:""
   }
   componentDidMount(){
@@ -48,6 +48,7 @@ export default class App extends React.Component{
     copiaListaCarrinho.splice(indexProduto,1)
     this.setState({listaDeCarrinho: copiaListaCarrinho})
   }
+
   onChangeInputMin=(event) =>{
     this.setState({inputMin:event.target.value})
  }
@@ -71,6 +72,9 @@ onChangeBuscaPorNome=(event) =>{
        />
         <Produtos 
         ListaDeProdutos = {ListaDeProdutos}
+        inputMin={this.state.inputMin}
+        inputMax={this.state.inputMax}
+        buscaPorNome={this.state.buscaPorNome}
         />
         <Carrinho
           listaCarrinho={this.state.listaDeCarrinho} 

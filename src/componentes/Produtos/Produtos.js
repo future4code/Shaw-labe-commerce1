@@ -33,27 +33,51 @@ const ScrollContainer = styled.div`
   overflow-y: scroll;
   height: 100%;
 `
+const Header = styled.div`
+display: flex;
+flex-direction: rows ;
+justify-content: center;
+margin-top:5px;
+gap:100px;
+
+
+
+
+
+
+`
 export default class Produto extends React.Component {
   state = {
     sort: "DECRESCENTE",
   };
 
-  getFiltraLista = () => {
-    return this.props.produtos
-      .filter((produto) => produto.preco > this.props.inputMin)
-      .filter((produto) => produto.preco < this.props.inputMax)
+  getFiltrar = () => {
+    return this.props.ListaDeProdutos
+      .filter((produto) => produto.valor > this.props.inputMin)
+      .filter((produto) => produto.valor < this.props.inputMax)
       .filter((produto) => produto.nome.includes(this.props.buscaPorNome))
-      .sort((a, b) =>
-        this.state.sort === "CRESCENTE" ? a.preco - b.preco : b.preco - a.preco
-      );
-  };
+  }
 
+  getOrdenar = () => {
+    return this.props.ListaDeProdutos
+    
+    .sort((a, b) => this.state.sort === 'CRESCENTE' ? a.valor - b.valor : b.valor - a.valor)
+  }
+  onChangeSort=(event) =>{
+    this.setState({sort:event.target.value})
+ } 
   render() {
+    const filtrarProd= this.getFiltrar()
+    const ordenarProd= this.getOrdenar()
+      
     let renderProdutos;
-    renderProdutos = this.props.ListaDeProdutos.map((produto) => {
+    let mostrarProdutos;
+   {filtrarProd.length ?  mostrarProdutos=filtrarProd : mostrarProdutos=this.props.ListaDeProdutos }
+    renderProdutos = mostrarProdutos.map((produto) => { 
+    
       return (
         <CardContainer>
-          <img src={produto.imagem} />
+          {/* <img src={produto.imagem} /> */}
           <h2> {produto.nome}</h2>
           <h3>Valor R$:{produto.valor}</h3>
           <p>quantidade: {produto.quantidade}</p>
@@ -69,15 +93,16 @@ export default class Produto extends React.Component {
     return (
       <MainContainer>
         <ScrollContainer>
+          <Header>
+          Quantidade de Produtos:  {mostrarProdutos.length}
           <label>
-            {" "}
-            Ordenação:
-            <select value={this.state.sort}>
+            Ordenação: 
+            <select value={this.state.sort} onChange={this.onChangeSort}>
               <option value={"CRESCENTE"}>Crescente</option>
               <option value={"DECRESCENTE"}>Decrescente</option>
             </select>
           </label>
-
+          </Header>
           <ContainerProdutos>{renderProdutos}</ContainerProdutos>
         </ScrollContainer>
       </MainContainer>
