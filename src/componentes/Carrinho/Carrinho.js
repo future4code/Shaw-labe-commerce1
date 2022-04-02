@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import iconeCarrinho from "../../carrinho-de-compras.png";
 import astronauta from "../img/imagem-astronauta.png";
+import iconeLixeira from './lixeira.png'
 
 const MainContainer = styled.div`
   grid-area: sidebarright;
@@ -12,6 +13,9 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    font-size: 7px;
+  }
 `;
 const ImgAstronauta = styled.img`
   width: 15%;
@@ -43,24 +47,27 @@ const ItemProduto = styled.div`
   align-items: center;
   width: 100%;
   font-size: 13px;
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    grid-template-columns: 7% 73% 15%;
+    padding: 2px;
+    gap:2px;
+    p{
+      font-size: 6px;
+    }
+  }
 `;
-const Button = styled.button`
-  cursor: pointer;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  color: white;
-  padding: 5px;
-  font-size: 12px;
-  background-image: linear-gradient(
-    to right,
-    darkblue,
-    blueviolet,
-    rgb(228, 60, 161)
-  );
-`;
+
+const IconeLixeira = styled.img`
+  width: 70%;
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width: 100%;
+  }
+`
 const Img = styled.img`
   width: 15%;
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width: 20%;
+  }
 `;
 const TituloCarrinho = styled.div`
   display: flex;
@@ -69,6 +76,11 @@ const TituloCarrinho = styled.div`
   gap: 5px;
   h3 {
     font-size: 16px;
+  }
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    h3{
+      font-size: 7px;
+    }
   }
 `;
 
@@ -83,9 +95,13 @@ export default class Carrinho extends React.Component {
         <ItemProduto key={produto.id}>
           <p>{produto.quantidade}</p>
           <p>{produto.nome}</p>
-          <Button onClick={() => this.props.removerProdutoCarrinho(produto.id)}>
-            Remover
-          </Button>
+          {/* <Button onClick={() => this.props.removerProdutoCarrinho(produto.id)}> */}
+            <IconeLixeira 
+            src={iconeLixeira} 
+            alt={"Icone Lixeira"}
+            onClick={() => this.props.removerProdutoCarrinho(produto.id)}
+            />
+          {/* </Button> */}
         </ItemProduto>
       );
     });

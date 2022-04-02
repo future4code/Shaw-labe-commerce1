@@ -8,24 +8,38 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction:column;
   align-items:center;
-  justify-content:center;
+  justify-content:top;
   gap:10px;
+  margin-top:30px;
   color:white;
   h1{
     font-size: 16px;
   }
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    font-size: 7px;
+    gap:2px;
+    h3{
+      margin-bottom: 15px;
+    }
+  }
 
 `
 const Input = styled.input`
-    outline: none;
-    border: double 2px transparent;
-    height: 2rem;
+  outline: none;
+  border: double 2px transparent;
+  height: 2rem;
 
-    :focus{
-      background-image: linear-gradient(white, white), linear-gradient(45deg,rgb(228, 60, 161),blueviolet,darkblue);
-      background-origin: border-box;
-      background-clip: content-box, border-box;
-    }
+  :focus{
+    background-image: linear-gradient(white, white), linear-gradient(45deg,rgb(228, 60, 161),blueviolet,darkblue);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+  }
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width: 90%;
+    margin: 0 auto;
+    height: 100%;
+    font-size: 7px;
+  }
 `
 const InputContainer = styled.label`
 display:flex;
