@@ -250,7 +250,7 @@ export default class DetalheProduto extends React.Component {
                                 <option value={'3G'}>3G</option>
                             </Select>
                             
-                            <button onClick={()=>{this.props.addCarrinho(this.props.produto.id)}}>Adicionar ao carrinho</button>
+                            <button onClick={()=>{this.props.addProdutoCarrinho(this.props.produto.id)}}>Adicionar ao carrinho</button>
                         </Infos>
                         <Tabela>
                             <ImgTamanhos src="https://images.tcdn.com.br/img/editor/up/760957/LaMaglia_SizeChart_1.jpg" />

@@ -16,11 +16,12 @@ const ContainerProdutos = styled.div`
   flex-wrap: wrap;
   border-top: 1px solid black;
   padding: 5px;
- justify-content: center;
+  justify-content: center;
+  gap:7px;
 `;
 
 const CardContainer = styled.div`
-  max-width: 31%;
+  width: 31%;
   height: 14%;
   text-align: center;
   background-image: linear-gradient(to top, darkblue,blueviolet,blue, rgb(228, 60, 161));
@@ -36,6 +37,7 @@ const CardContainer = styled.div`
   }
   h2{
     font-size: 1.3rem;
+    margin-top: 10px;
    
   }
 
@@ -48,7 +50,7 @@ const CardContainer = styled.div`
   img {
     display: flex;
     width: 95%;
-    height: 55%;
+    height: 60%;
     border: 2px solid black;
     margin:0 auto;
     margin-top:5px;
@@ -64,7 +66,7 @@ const ProdutoBotao = styled.button`
   color:white;
   padding: 10px;
   background:black;
-  margin-top: 5%;
+  margin-top: 10%;
 
   :hover{
     background-image: linear-gradient(to right, black,darkblue,blueviolet, rgb(228, 60, 161,0.5))
@@ -117,7 +119,9 @@ export default class Produto extends React.Component {
 
       return (
         <CardContainer key={produto.id}>
-          <img src={produto.imagem} />
+          <img src={produto.imagem} 
+          onClick={() => this.props.verMais(produto.id)}
+          />
           <h2> {produto.nome}</h2>
 
           <h3>R$ {produto.valor.toFixed(2).replace('.',',')}</h3>
@@ -127,7 +131,7 @@ export default class Produto extends React.Component {
           >
             Adicionar ao Carrinho
           </ProdutoBotao>
-
+        
         </CardContainer>
       );
     });
