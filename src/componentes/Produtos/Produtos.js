@@ -95,9 +95,9 @@ export default class Produto extends React.Component {
 
   getFiltrar = () => {
     return this.props.ListaDeProdutos
+      .filter((produto) => produto.nome.includes(this.props.buscaPorNome))
       .filter((produto) => produto.valor > this.props.inputMin)
       .filter((produto) => produto.valor < this.props.inputMax)
-      .filter((produto) => produto.nome.includes(this.props.buscaPorNome))
   }
 
   getOrdenar = () => {

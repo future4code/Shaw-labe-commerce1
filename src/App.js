@@ -83,6 +83,7 @@ export default class App extends React.Component {
     );
     produtosSalvosCarrinho &&
       this.setState({ listaDeCarrinho: produtosSalvosCarrinho });
+    
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.listaDeCarrinho !== this.state.listaDeCarrinho) {
@@ -133,10 +134,13 @@ export default class App extends React.Component {
     this.setState({ buscaPorNome: event.target.value });
   };
   verMais = (id) => {
+    let indice= ListaDeProdutos.findIndex((item)=>item.id===id)
     this.setState({
-      idVerMais: id,
+      idVerMais: indice,
       detalheProduto: true,
     });
+   
+   
   };
   verMenos = () => {
     this.setState({
@@ -152,7 +156,7 @@ export default class App extends React.Component {
           {this.state.detalheProduto ? (
             <Container>
               <DetalheProduto
-                produto={ListaDeProdutos[this.state.idVerMais - 1]}
+                produto={ListaDeProdutos[this.state.idVerMais]}
                 addCarrinho={this.adicionarProdutoCarrinho}
                 verMenos={this.verMenos}
                 addProdutoCarrinho={this.addProdutoCarrinho}
