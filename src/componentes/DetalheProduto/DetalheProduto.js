@@ -10,6 +10,9 @@ const ContaineDetalhes = styled.div`
     'imagem info'
     'perguntas tabela';
     color: white;
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    font-size: 5px;
+    }
 `
 const Tabela = styled.div`
     width: 90%;
@@ -36,10 +39,11 @@ const TopInfos = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     >p{
         cursor: pointer;
-
     }
+
 `
 const Infos = styled.div`
     height: 100%;
@@ -58,7 +62,14 @@ const Infos = styled.div`
         color:white;
         padding: 5px;
         background-image: linear-gradient(to right,black, darkblue,blueviolet, rgb(228, 60, 161));
-        margin:0 15px ;
+    }
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    font-size: 7px;
+    button{
+        font-size: 5px;
+        padding: 2px;
+        border-radius: 2px;
+    }
     }
 `
 const Perguntas = styled.div`
@@ -94,16 +105,24 @@ const Perguntas = styled.div`
             background-color: rgb(43, 43, 47);
             color:rgb(228, 60, 161);
         }
-
-        textarea{
-            outline: none;
-            border: none;
-            padding: 5px;
-            border-radius:0px 5px;
-            border-bottom:2px solid darkblue;
-            background-color: rgb(43, 43, 47);
-            color:rgb(228, 60, 161);
+    }
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    
+    h1{
+        font-size: 7px;
+    }
+    div{
+        input{
+            font-size: 7px;
+            padding: 2px;
         }
+
+    }
+    button{
+        font-size: 5px;
+        padding: 2px;
+        border-radius: 2px;
+    }
     }
 `
 const Politicas = styled.div`
@@ -129,6 +148,14 @@ const PoliticasItem = styled.div`
     img{
         height:40px;
     }
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+        img{
+            height:20px ;
+        }
+        p{
+            font-size: 5px;
+        }
+    }
 `
 const Marca = styled.p`
     cursor: pointer;
@@ -143,15 +170,25 @@ const Cor = styled.p`
     span{
         font-weight:bold;
     }
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    font-size: 5px;
+
+    }
 `
 const Preco = styled.p`
     color:rgb(233, 86, 86);
     font-size: 18px;
     padding:0px 15px;
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    font-size: 7px; 
+    }
     
 `
 const Label = styled.label`
     padding:5px 2px; 
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    font-size: 5px;
+    }
 `
 const Select = styled.select`
     background-color: rgb(43, 43, 47);
@@ -160,6 +197,9 @@ const Select = styled.select`
     outline: none;
     padding: 0px 2px;
     margin-left: 2px;
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+        font-size: 5px;
+    }
 
 `
 const Titulo = styled.p`
@@ -169,6 +209,9 @@ const Titulo = styled.p`
     padding: 10px 2px;
     border-bottom:1px solid;
     border-image:linear-gradient(45deg,rgb(228, 60, 161),blueviolet,darkblue, black )1;
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    font-size: 9px;
+    }
 `
 const ScrollContainer = styled.div`
   display:flex;
@@ -187,47 +230,55 @@ const MainContainer = styled.div`
 const Span = styled.div`
   color: rgb(228, 60, 161);
 `
+const ContainerTamano = styled.div`
+    display:flex;
+    align-items: center;
+    gap:10px;
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+        gap:2px;
+    }
+`
 
 export default class DetalheProduto extends React.Component {
-    state={
-        comentarios:[
+    state = {
+        comentarios: [
             {
-                user:'lay',
-                comentario:'Quanto tempo para entregar no sertão da paraíba?'
+                user: 'lay',
+                comentario: 'Quanto tempo para entregar no sertão da paraíba?'
             },
             {
-                user:'rani',
-                comentario:'Não tem na cor preta?'
+                user: 'rani',
+                comentario: 'Não tem na cor preta?'
             },
             {
-                user:'silvia',
-                comentario:'Dá pra retirar direto na loja?'
+                user: 'silvia',
+                comentario: 'Dá pra retirar direto na loja?'
             },
         ],
-        inputUser:'',
-        inputComentario:'',
+        inputUser: '',
+        inputComentario: '',
     }
-    onChangeUser = (event) =>{
-        this.setState({inputUser:event.target.value})
+    onChangeUser = (event) => {
+        this.setState({ inputUser: event.target.value })
     }
-    onChangeComentario = (event) =>{
-        this.setState({inputComentario:event.target.value})
+    onChangeComentario = (event) => {
+        this.setState({ inputComentario: event.target.value })
     }
-    onClickEnviar = () =>{
+    onClickEnviar = () => {
         const novoComentario = [... this.state.comentarios]
         novoComentario.push({
-            user:this.state.inputUser,
-            comentario:this.state.inputComentario
+            user: this.state.inputUser,
+            comentario: this.state.inputComentario
         })
         this.setState({
-            comentarios:novoComentario,
-            inputComentario:'',
-            inputUser:''
+            comentarios: novoComentario,
+            inputComentario: '',
+            inputUser: ''
         })
     }
     render() {
-        let render = this.state.comentarios.map((coment)=>{
-            return(
+        let render = this.state.comentarios.map((coment) => {
+            return (
                 <div>
                     <p><Span>{coment.user}:</Span> {coment.comentario}</p>
                 </div>
@@ -259,18 +310,20 @@ export default class DetalheProduto extends React.Component {
                                 </PoliticasItem>
                             </Politicas>
                             <Cor><span>Cor:</span> {this.props.produto.cor}</Cor>
-                            <Label>Tamanho:</Label>
-                            <Select>
-                                <option value={''}>Selecione</option>
-                                <option value={'PP'}>PP</option>
-                                <option value={'P'}>P</option>
-                                <option value={'M'}>M</option>
-                                <option value={'G'}>G</option>
-                                <option value={'GG'}>GG</option>
-                                <option value={'3G'}>3G</option>
-                            </Select>
-                            
-                            <button onClick={()=>{this.props.addProdutoCarrinho(this.props.produto.id)}}>Adicionar ao carrinho</button>
+                            <ContainerTamano>
+                                <Label>Tamanho:</Label>
+                                <Select>
+                                    <option value={''}>Selecione</option>
+                                    <option value={'PP'}>PP</option>
+                                    <option value={'P'}>P</option>
+                                    <option value={'M'}>M</option>
+                                    <option value={'G'}>G</option>
+                                    <option value={'GG'}>GG</option>
+                                    <option value={'3G'}>3G</option>
+                                </Select>
+
+                                <button onClick={() => { this.props.addProdutoCarrinho(this.props.produto.id) }}>Adicionar ao carrinho</button>
+                            </ContainerTamano>
                         </Infos>
                         <Tabela>
                             <ImgTamanhos src="https://images.tcdn.com.br/img/editor/up/760957/LaMaglia_SizeChart_1.jpg" />
@@ -278,14 +331,14 @@ export default class DetalheProduto extends React.Component {
                         <Perguntas>
                             <h1>Dúvidas?</h1>
                             <div>
-                                <input 
-                                placeholder="Usuário" 
-                                value={this.inputUser}
-                                onChange={this.onChangeUser} />
-                                <input 
-                                placeholder="Pergunta" 
-                                value={this.inputComentario}
-                                onChange={this.onChangeComentario} />
+                                <input
+                                    placeholder="Usuário"
+                                    value={this.inputUser}
+                                    onChange={this.onChangeUser} />
+                                <input
+                                    placeholder="Pergunta"
+                                    value={this.inputComentario}
+                                    onChange={this.onChangeComentario} />
                             </div>
                             <button onClick={this.onClickEnviar}>Enviar</button>
                             <div>
@@ -294,7 +347,7 @@ export default class DetalheProduto extends React.Component {
                         </Perguntas>
 
                     </ContaineDetalhes>
-                    </ScrollContainer>
+                </ScrollContainer>
             </MainContainer>
         )
     }

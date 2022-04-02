@@ -28,6 +28,12 @@ const GlobalStyle = createGlobalStyle`
     color: white;
     
   }
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    *::-webkit-scrollbar{
+    width: 1px;
+    height:1px;
+  }
+  }
 `;
 const MainContainer = styled.div`
   height: 100vh;
@@ -62,7 +68,11 @@ const Borda = styled.div`
       ? `"header header header"
      "main main sidebarright"`
       : `"header header header"  
-     "sidebar main sidebarright"`};
+     "sidebar main sidebarright"`
+  };
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    grid-template-columns: 25vw 50vw 25vw;
+  }
 `;
 
 export default class App extends React.Component {
