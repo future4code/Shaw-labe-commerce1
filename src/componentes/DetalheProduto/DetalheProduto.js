@@ -203,7 +203,27 @@ export default class DetalheProduto extends React.Component {
                 user:'silvia',
                 comentario:'Dá pra retirar direto na loja?'
             },
-        ]
+        ],
+        inputUser:'',
+        inputComentario:'',
+    }
+    onChangeUser = (event) =>{
+        this.setState({inputUser:event.target.value})
+    }
+    onChangeComentario = (event) =>{
+        this.setState({inputComentario:event.target.value})
+    }
+    onClickEnviar = () =>{
+        const novoComentario = [... this.state.comentarios]
+        novoComentario.push({
+            user:this.state.inputUser,
+            comentario:this.state.inputComentario
+        })
+        this.setState({
+            comentarios:novoComentario,
+            inputComentario:'',
+            inputUser:''
+        })
     }
     render() {
         let render = this.state.comentarios.map((coment)=>{
@@ -258,10 +278,16 @@ export default class DetalheProduto extends React.Component {
                         <Perguntas>
                             <h1>Dúvidas?</h1>
                             <div>
-                                <input placeholder="Email" />
-                                <textarea placeholder="Pergunta" />
+                                <input 
+                                placeholder="Usuário" 
+                                value={this.inputUser}
+                                onChange={this.onChangeUser} />
+                                <input 
+                                placeholder="Pergunta" 
+                                value={this.inputComentario}
+                                onChange={this.onChangeComentario} />
                             </div>
-                            <button>Enviar</button>
+                            <button onClick={this.onClickEnviar}>Enviar</button>
                             <div>
                                 {render}
                             </div>

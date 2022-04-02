@@ -18,21 +18,31 @@ const ImgAstronauta = styled.img`
   position: absolute;
   bottom: 0;
 `;
+const ScrollContainer = styled.div`
+   display: flex;
+  flex-flow:column nowrap;
+  max-height: 60%;
+  margin-bottom: 20px;
+`;
 const ListaProdutos = styled.div`
-  width: 100%;
   display: flex;
-  flex-direction: column;
+  overflow: auto;
+  flex:none;
+  flex-flow:column nowrap;
+  overflow-y: scroll;
+  height: 100%;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
 `;
 const ItemProduto = styled.div`
   display: grid;
-  grid-template-columns: 5% 70% 20%;
+  grid-template-columns: 5% 60% 30%;
   padding: 5px;
   gap: 5px;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
+  font-size: 13px;
 `;
 const Button = styled.button`
   cursor: pointer;
@@ -41,6 +51,7 @@ const Button = styled.button`
   border-radius: 5px;
   color: white;
   padding: 5px;
+  font-size: 12px;
   background-image: linear-gradient(
     to right,
     darkblue,
@@ -89,7 +100,7 @@ export default class Carrinho extends React.Component {
           <Img src={iconeCarrinho} />
           <h3>Carrinho:</h3>
         </TituloCarrinho>
-        <ListaProdutos>{listaProdutoCarrinho}</ListaProdutos>
+        <ScrollContainer><ListaProdutos>{listaProdutoCarrinho}</ListaProdutos></ScrollContainer>
         <p>Valor total: R${valorTotal.toFixed(2).replace(".", ",")}</p>
         <ImgAstronauta src={astronauta} />
       </MainContainer>
