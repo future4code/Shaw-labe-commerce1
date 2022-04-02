@@ -18,10 +18,11 @@ const MainContainer = styled.div`
 `
 const Input = styled.input`
     outline: none;
-    border: double 1.5px transparent;
+    border: double 2px transparent;
+    height: 2rem;
 
     :focus{
-      background-image: linear-gradient(white, white), linear-gradient(45deg,rgb(228, 60, 161),blueviolet,darkblue,black);
+      background-image: linear-gradient(white, white), linear-gradient(45deg,rgb(228, 60, 161),blueviolet,darkblue);
       background-origin: border-box;
       background-clip: content-box, border-box;
     }
