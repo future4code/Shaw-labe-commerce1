@@ -117,7 +117,7 @@ export default class Produto extends React.Component {
 
       return (
         <CardContainer key={produto.id}>
-          {/* <img src={produto.imagem} /> */}
+          <img src={produto.imagem} />
           <h2> {produto.nome}</h2>
 
           <h3>R$ {produto.valor.toFixed(2).replace('.',',')}</h3>
