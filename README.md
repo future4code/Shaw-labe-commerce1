@@ -21,6 +21,7 @@ Desenvolver um e-commerce de itens espaciais. Intuito é aplicar os conteúdos e
 ## ✔️ O que funciona
 - filter por valor mínimo
 - filter por valor máximo
+- filtro por nome
 - ordenação crescente e decrescente
 - botões de adicionar e remover itens ao carrinho
 - página de detalhes de produto
@@ -28,7 +29,6 @@ Desenvolver um e-commerce de itens espaciais. Intuito é aplicar os conteúdos e
 - Salvar e Recuperar conteúdo do carrinho usando o LocalStorage
 
 ## ❌ O que não funciona
-- filtro por nome (só funciona quando preenche os 3 inputs)
 - filtro valor mínimo funciona só quando informa o máximo
 
 ## :fire: Funcionalidade Extra
