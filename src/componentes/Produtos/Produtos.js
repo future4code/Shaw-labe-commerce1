@@ -144,7 +144,7 @@ export default class Produto extends React.Component {
     return this.props.ListaDeProdutos
       .filter((produto) => this.props.inputMin === '' || produto.valor > this.props.inputMin)
       .filter((produto) => this.props.inputMax === '' || produto.valor < this.props.inputMax)
-      .filter((produto) => this.props.buscaPorNome === '' || produto.nome.includes(this.props.buscaPorNome))
+      .filter((produto) => this.props.buscaPorNome === '' || produto.nome.toUpperCase().includes(this.props.buscaPorNome.toUpperCase()))
   }
 
   getOrdenar = () => {
