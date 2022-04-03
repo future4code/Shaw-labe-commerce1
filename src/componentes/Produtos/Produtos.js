@@ -15,8 +15,9 @@ const MainContainer = styled.div`
 `;
 
 const ContainerProdutos = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 31% 31% 31%;
+  grid-template-rows: auto;
   border-top: 1px solid black;
   padding: 5px;
   justify-content: center;
@@ -30,8 +31,7 @@ const ContainerProdutos = styled.div`
 `;
 
 const CardContainer = styled.div`
-  width: 31%;
-  height: 14%;
+
   text-align: center;
   background-image: linear-gradient(to top, darkblue,blueviolet,blue, rgb(228, 60, 161));
   margin: 7px;
@@ -142,9 +142,9 @@ export default class Produto extends React.Component {
 
   getFiltrar = () => {
     return this.props.ListaDeProdutos
-      .filter((produto) => produto.nome.includes(this.props.buscaPorNome))
-      .filter((produto) => produto.valor > this.props.inputMin)
-      .filter((produto) => produto.valor < this.props.inputMax)
+      .filter((produto) => this.props.inputMin === '' || produto.valor > this.props.inputMin)
+      .filter((produto) => this.props.inputMax === '' || produto.valor < this.props.inputMax)
+      .filter((produto) => this.props.buscaPorNome === '' || produto.nome.includes(this.props.buscaPorNome))
   }
 
   getOrdenar = () => {
@@ -166,19 +166,19 @@ export default class Produto extends React.Component {
 
       return (
         <CardContainer key={produto.id}>
-          <img src={produto.imagem} 
-          onClick={() => this.props.verMais(produto.id)}
+          <img src={produto.imagem}
+            onClick={() => this.props.verMais(produto.id)}
           />
           <h2> {produto.nome}</h2>
 
-          <h3>R$ {produto.valor.toFixed(2).replace('.',',')}</h3>
+          <h3>R$ {produto.valor.toFixed(2).replace('.', ',')}</h3>
           <p>{produto.parcelas}</p>
           <ProdutoBotao
             onClick={() => this.props.addProdutoCarrinho(produto.id)}
           >
             Adicionar ao Carrinho
           </ProdutoBotao>
-        
+
         </CardContainer>
       );
     });
@@ -196,7 +196,9 @@ export default class Produto extends React.Component {
               </select>
             </label>
           </Header>
-          <ContainerProdutos>{renderProdutos}</ContainerProdutos>
+          <ContainerProdutos>
+            {renderProdutos}
+          </ContainerProdutos>
         </ScrollContainer>
       </MainContainer>
     );
