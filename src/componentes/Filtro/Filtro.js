@@ -10,7 +10,6 @@ const MainContainer = styled.div`
   align-items:center;
   justify-content:top;
   gap:10px;
-  margin-top:30px;
   color:white;
   h1{
     font-size: 16px;
